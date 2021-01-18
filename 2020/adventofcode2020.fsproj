@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <GenerateProgramFile>false</GenerateProgramFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="input-day*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="utils.fs" />
+    <Compile Include="day01.fs" />
+    <Compile Include="day02.fs" />
+    <Compile Include="day03.fs" />
+    <Compile Include="day04.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Expecto" Version="9.0.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="unquote" Version="5.0.0" />
+    <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.11.1" />
+  </ItemGroup>
+</Project>
