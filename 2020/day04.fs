@@ -28,12 +28,12 @@ let parseInput (input:string) =
     (splittedInput.[0], splittedInput.[1])
 
 let parsePassport (input:string) =
-    input.Split([|' ';'\n';'\r'|], StringSplitOptions.RemoveEmptyEntries)
+    input.Split([|' ';'\n'|])
     |> Array.toList
     |> List.map parseInput
 
 let splitPassportEntries (input:string) =
-    input.Split([|"\n\n"; "\r\n\r\n"|], StringSplitOptions.None) |> Array.toList
+    input.Split("\n\n") |> Array.toList
 
 let logicalAnd x y = x && y
 

@@ -5,11 +5,17 @@ open Utils
 open Expecto
 open Swensen.Unquote
 
-let testData = "1721\r\n979\r\n366\r\n299\r\n675\r\n1456"
+let testData = "1721
+979
+366
+299
+675
+1456"
 
 let readNumbers (content:string) =
     content
     |> splitLines
+    |> List.filter (not << String.IsNullOrWhiteSpace)
     |> List.map Int32.Parse
 
 let rec comb n l = 
