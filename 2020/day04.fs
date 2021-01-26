@@ -1,4 +1,4 @@
-module Day04
+module adventofcode2020.Day04
 
 open System
 open Utils

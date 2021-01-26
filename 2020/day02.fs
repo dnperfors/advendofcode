@@ -1,4 +1,4 @@
-module Day02
+module adventofcode2020.Day02
 
 open System
 open System.Text.RegularExpressions

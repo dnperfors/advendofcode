@@ -1,4 +1,4 @@
-module Day06
+module adventofcode2020.Day06
 
 open Expecto
 open Swensen.Unquote
