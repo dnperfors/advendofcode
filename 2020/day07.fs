@@ -16,6 +16,14 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags."
 
+let testData2 = "shiny gold bags contain 2 dark red bags.
+dark red bags contain 2 dark orange bags.
+dark orange bags contain 2 dark yellow bags.
+dark yellow bags contain 2 dark green bags.
+dark green bags contain 2 dark blue bags.
+dark blue bags contain 2 dark violet bags.
+dark violet bags contain no other bags."
+
 let parseLineColor line =
     let m = Regex("^(.*?) bags").Match(line)
     m.Groups.[1].Value
@@ -54,6 +62,12 @@ let countCanContain color rules =
    |> List.distinct
    |> List.length
 
+let rec countNumberOfBags (color:string) (rules :(string * (string * int) list) list) =
+    Map.ofList rules
+    |> Map.find color
+    |> List.map (fun (child, amount) -> amount + (amount * countNumberOfBags child rules))
+    |> List.sum
+    
 [<Tests>]
 let test =
     testList "Day 07" [
@@ -75,7 +89,7 @@ let test =
                 ("vibrant plum", [("faded blue", 5); ("dotted black", 6)])
                 ("faded blue", [])
                 ("dotted black", [])
-            ]
+            ] 
             test <@ parseLines testData = expected @>
 
         testCase "Reverse rules" <| fun _ ->
@@ -102,5 +116,17 @@ let test =
 
             testCase "Solution" <| fun _ ->
                 test <@ parseLines (getFileContent "input-day07") |> countCanContain "shiny gold" = 274 @>
+        ]
+        
+        testList "Part 2" [
+            testCase "Acceptance test" <| fun _ ->
+                test <@ parseLines testData |> countNumberOfBags "faded blue" = 0 @>
+                test <@ parseLines testData |> countNumberOfBags "vibrant plum" = 11 @>
+                test <@ parseLines testData |> countNumberOfBags "dark olive" = 7 @>
+                test <@ parseLines testData |> countNumberOfBags "shiny gold" = 32 @>
+                test <@ parseLines testData2 |> countNumberOfBags "shiny gold" = 126 @>
+                
+            testCase "Solution" <| fun _ ->
+                test <@ parseLines (getFileContent "input-day07") |> countNumberOfBags "shiny gold" = 158730 @>
         ]
     ]
